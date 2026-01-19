@@ -3,6 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jp.co.sss.lms.mapper.TStudentAttendanceMapper">
 
+	<!--勤務データを全部取る-->
 	<select id="findByLmsUserId" resultType="jp.co.sss.lms.entity.TStudentAttendance">
 		SELECT * 
 		FROM t_student_attendance
@@ -11,6 +12,7 @@
 		ORDER BY training_date ASC
 	</select>
 
+	<!--特定の日付の勤怠を一件取る-->
 	<select id="findByLmsUserIdAndTrainingDate" resultType="jp.co.sss.lms.entity.TStudentAttendance">
 		SELECT * 
 		FROM t_student_attendance
@@ -19,6 +21,7 @@
 			AND delete_flg = #{deleteFlg}
 	</select>
 
+	<!--勤怠管理画面表示用-->
 	<select id="getAttendanceManagement" resultType="jp.co.sss.lms.dto.AttendanceManagementDto">
 		SELECT
 			(cast(t2.date AS DATE) = current_date) AS is_today,
@@ -38,6 +41,20 @@
 		WHERE t1.course_id = #{courseId} 
 			AND t1.delete_flg = #{deleteFlg}
 		ORDER BY t2.date ASC
+	</select>
+	
+	<!--id="countUnenteredPastAttendance"  自分でつけて良いid名-->
+	<!--resultType="int"  SQLの結果をどの型でJava側に受け取らせるか指定するもの(今回は数字なのでintで良さそう)-->
+	<select id="countUnenteredPastAttendance" resultType="int" parameterType="map">
+		SELECT COUNT (*)
+		FROM t_student_attendance
+		WHERE lms_user_id = #{lmsUserId}
+			AND training_date &lt; #{currentDate}
+			AND (training_start_time IS NULL
+				OR training_start_time = ''
+				OR training_end_time IS NULL
+				OR training_end_time = '')
+			AND delete_flg = #{deleteFlg}
 	</select>
 
 	<insert id="insert" parameterType="jp.co.sss.lms.entity.TStudentAttendance" useGeneratedKeys="true" keyProperty="studentAttendanceId">
