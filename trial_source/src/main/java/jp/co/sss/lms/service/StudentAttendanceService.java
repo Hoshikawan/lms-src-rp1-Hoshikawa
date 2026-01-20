@@ -125,6 +125,25 @@ public class StudentAttendanceService {
 	}
 
 	/**
+	 * 過去の勤怠に未入力が存在するかチェック
+	 * 
+	 * @param lmsUserId
+	 * @return 過去日に未入力が存在する場合はtrue、存在しない場合はfalse
+	 */
+	public boolean husUnenteredPastAttendance(Integer lmsUserId) {
+		// 現在日時を取得
+		Date today = new Date();
+		// 論理削除(=実際には削除していないけど、業務的には消したいデータ)されていないデータだけを対象とするための記述
+		// 削除済みだったり、無効なデータを一緒に数えてしまうと未入力がないはずなのに謎のダイアログが出てきてしまうため。
+		Integer deleteFlg = 0;
+		// 未入力件数の取得 引数の順番がMapperと同じじゃないとエラーが出てきてしまう
+		// todayについて→先ほど取得したService側の変数名であり中身はcurrentDate（MybatisがSQLと紐づけるための名前）と同じもの
+		int unenteredCount = tStudentAttendanceMapper.countUnenteredPastAttendance(lmsUserId, today, deleteFlg);
+		// 件数が１件以上あればtrue
+		return unenteredCount > 0;
+	}
+
+	/**
 	 * 出勤ボタン処理
 	 * 
 	 * @return 完了メッセージ
