@@ -134,12 +134,8 @@ public class StudentAttendanceService {
 	public boolean husUnenteredPastAttendance(Integer lmsUserId) {
 		// 現在日時を取得
 		Date trainingDate = new Date();
-		// 論理削除(=実際には削除していないけど、業務的には消したいデータ)されていないデータだけを対象とするための記述
-		// 削除済みだったり、無効なデータを一緒に数えてしまうと未入力がないはずなのに謎のダイアログが出てきてしまうため。
-		Integer deleteFlg = 0;
 		// 未入力件数の取得 引数の順番がMapperと同じじゃないとエラーが出てきてしまう
-		// todayについて→先ほど取得したService側の変数名であり中身はcurrentDate（MybatisがSQLと紐づけるための名前）と同じもの
-		int unenteredCount = tStudentAttendanceMapper.notEnterCount(lmsUserId, deleteFlg, trainingDate);
+		int unenteredCount = tStudentAttendanceMapper.notEnterCount(lmsUserId, trainingDate);
 		// 件数が１件以上あればtrue
 		return unenteredCount > 0;
 	}

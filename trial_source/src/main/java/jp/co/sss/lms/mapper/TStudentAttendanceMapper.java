@@ -55,11 +55,9 @@ public interface TStudentAttendanceMapper {
 	 * 
 	 * @param lmsUserId
 	 * @param currentDate
-	 * @param deleteFlg
 	 * @return 過去日未入力件数
 	 */
-	 int notEnterCount(@Param("lmsUserId") Integer lmsUserId, 
-			 @Param("deleteFlg") Integer deleteFlg, @Param("trainingDate") Date trainingDate);
+	 int notEnterCount(@Param("lmsUserId") Integer lmsUserId, @Param("trainingDate") Date trainingDate);
 
 	/**
 	 * 勤怠情報（受講生入力）登録

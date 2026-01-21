@@ -45,14 +45,13 @@
 	
 <!--	製造：星川詩音 - Task.25-->
 	<!--id="countUnenteredPastAttendance"  自分でつけて良いid名-->
-	<!--resultType="int"  SQLの結果をどの型でJava側に受け取らせるか指定するもの(今回は数字なのでintで良さそう)-->
+	<!--resultType="int"  SQLの結果をどの型でJava側に受け取らせるか指定するもの(今回は数字なのでintで良い)-->
 	<select id="notEnterCount" resultType="int">
-		SELECT COUNT (*)
+		SELECT COUNT(*)
 		FROM t_student_attendance
 		WHERE lms_user_id = #{lmsUserId}
-			AND delete_flg = #{deleteFlg}
 			AND training_date &lt; #{trainingDate}
-			AND attendance_status != 1
+			AND status != 1
 			AND (training_start_time IS NULL
 				OR training_start_time = ''
 				OR training_end_time IS NULL
