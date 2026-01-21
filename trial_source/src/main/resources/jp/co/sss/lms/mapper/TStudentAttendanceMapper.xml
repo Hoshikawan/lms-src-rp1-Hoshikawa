@@ -43,6 +43,7 @@
 		ORDER BY t2.date ASC
 	</select>
 	
+<!--	製造：星川詩音 - Task.25-->
 	<!--id="countUnenteredPastAttendance"  自分でつけて良いid名-->
 	<!--resultType="int"  SQLの結果をどの型でJava側に受け取らせるか指定するもの(今回は数字なのでintで良さそう)-->
 	<select id="countUnenteredPastAttendance" resultType="int" parameterType="map">

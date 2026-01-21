@@ -50,6 +50,7 @@ public interface TStudentAttendanceMapper {
 			@Param("lmsUserId") Integer lmsUserId, @Param("deleteFlg") Short deleteFlg);
 
 	/**
+	 * 製造：星川詩音 - Task.25
 	 * 過去日の未入力件数
 	 * 
 	 * @param lmsUserId

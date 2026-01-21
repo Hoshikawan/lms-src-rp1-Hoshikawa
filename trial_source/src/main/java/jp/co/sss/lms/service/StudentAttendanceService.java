@@ -125,6 +125,7 @@ public class StudentAttendanceService {
 	}
 
 	/**
+	 * 製造：星川詩音 - Task.25
 	 * 過去の勤怠に未入力が存在するかチェック
 	 * 
 	 * @param lmsUserId
