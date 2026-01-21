@@ -31,6 +31,9 @@ public class AttendanceController {
 	private LoginUserDto loginUserDto;
 
 	/**
+	 * 追加：星川詩音 - Task.25
+	 * 画面表示後、未入力がある場合はダイアログを表示
+	 * 
 	 * 勤怠管理画面 初期表示
 	 * 
 	 * @param lmsUserId
@@ -46,7 +49,10 @@ public class AttendanceController {
 		List<AttendanceManagementDto> attendanceManagementDtoList = studentAttendanceService
 				.getAttendanceManagement(loginUserDto.getCourseId(), loginUserDto.getLmsUserId());
 		model.addAttribute("attendanceManagementDtoList", attendanceManagementDtoList);
-
+		// 過去日の未入力チェック（Service）
+		boolean husUnenteredPastAttendance = studentAttendanceService.husUnenteredPastAttendance(loginUserDto.getLmsUserId());
+		// 画面へ渡す
+		model.addAttribute("husUnenteredPastAttendance", husUnenteredPastAttendance);
 		return "attendance/detail";
 	}
 
