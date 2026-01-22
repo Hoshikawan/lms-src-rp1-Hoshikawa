@@ -146,5 +146,15 @@ public class AttendanceUtil {
 		}
 		return false;
 	}
+	
+	/**
+	 * 時間のプルダウンマップを生成
+	 * 
+	 * @return １時間刻みの時間マップ
+	 */
+//	public LinkedHashMap<Integer, String> getHourMap(){
+//		
+//		return null;
+//	}
 
 }
