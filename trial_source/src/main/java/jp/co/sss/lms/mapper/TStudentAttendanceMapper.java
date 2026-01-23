@@ -57,7 +57,9 @@ public interface TStudentAttendanceMapper {
 	 * @param currentDate
 	 * @return 過去日未入力件数
 	 */
-	 int notEnterCount(@Param("lmsUserId") Integer lmsUserId, @Param("trainingDate") Date trainingDate);
+	// SQLがCOUNT(*)を返すので、Java側の戻り値型はint
+	 int notEnterCount(@Param("lmsUserId") Integer lmsUserId,@Param("deleteFlg") Integer deleteFlg, 
+			 @Param("trainingDate") Date trainingDate);
 
 	/**
 	 * 勤怠情報（受講生入力）登録

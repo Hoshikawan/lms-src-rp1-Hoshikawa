@@ -47,9 +47,14 @@
 	<!--id="notEnterCount"  自分でつけて良いid名-->
 	<!--resultType="int"  SQLの結果をどの型でJava側に受け取らせるか指定するもの(今回は数字なのでintで良い)-->
 	<select id="notEnterCount" resultType="int">
+	<!--設計書で「過去日の未入力件数をカウント」と書かれている部分に対応-->
 		SELECT COUNT(*)
+		<!--設計書では「読み取りテーブルは t_student_attendance」と明記されている-->
 		FROM t_student_attendance
+		<!--設計書で「入力パラメータ = LMSユーザID」に対応-->
 		WHERE lms_user_id = #{lmsUserId}
+		<!--設計書で「削除フラグ = 入力パラメータ」に対応-->
+			AND delete_flg = #{deleteFlg}
 			AND training_date &lt; #{trainingDate}
 			AND status != 1
 			AND (training_start_time IS NULL

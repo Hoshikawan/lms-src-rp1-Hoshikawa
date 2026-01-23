@@ -135,7 +135,8 @@ public class StudentAttendanceService {
 		// 現在日時を取得
 		Date trainingDate = new Date();
 		// 未入力件数の取得 引数の順番がMapperと同じじゃないとエラーが出てきてしまう
-		int unenteredCount = tStudentAttendanceMapper.notEnterCount(lmsUserId, trainingDate);
+		int deleteFlg = 0;
+		int unenteredCount = tStudentAttendanceMapper.notEnterCount(lmsUserId, deleteFlg, trainingDate);
 		// 件数が１件以上あればtrue
 		return unenteredCount > 0;
 	}
