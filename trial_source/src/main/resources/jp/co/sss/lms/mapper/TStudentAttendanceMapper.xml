@@ -43,7 +43,7 @@
 		ORDER BY t2.date ASC
 	</select>
 	
-<!--	製造：星川詩音 - Task.25-->
+	<!--@author 星川詩音 - Task.25-->
 	<!--id="notEnterCount"  自分でつけて良いid名-->
 	<!--resultType="int"  SQLの結果をどの型でJava側に受け取らせるか指定するもの(今回は数字なのでintで良い)-->
 	<select id="notEnterCount" resultType="int">
@@ -57,10 +57,10 @@
 			AND delete_flg = #{deleteFlg}
 			AND training_date &lt; #{trainingDate}
 			AND status != 1
-			AND (training_start_time IS NULL
-				OR training_start_time = ''
-				OR training_end_time IS NULL
-				OR training_end_time = '')
+			AND (OR training_start_time = ''
+				training_start_time IS NULL
+				OR training_end_time = ''
+				OR training_end_time IS NULL)
 	</select>
 
 	<insert id="insert" parameterType="jp.co.sss.lms.entity.TStudentAttendance" useGeneratedKeys="true" keyProperty="studentAttendanceId">

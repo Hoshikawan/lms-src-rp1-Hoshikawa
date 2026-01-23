@@ -88,11 +88,11 @@
 		}
 	</script>
 	
-	<!-- 製造：星川詩音 - Task.25 -->
+	<!-- @author 星川詩音 - Task.25 -->
 	<!--この記述を書くことにより、JavaScriptの記述ができるようになる。-->
 	<!--/*[[…]]*/ の形式はThymeleafがJS内に埋め込むための構文-->
 	<script type="text/javascript" th:inline="javascript">
-		 const notEnterFlg = /*[[${husUnenteredPastAttendance}]]*/
+		 const notEnterFlg = /*[[${hasUnenteredPastAttendance}]]*/
 		 window.addEventListener('DOMContentLoaded', function() {
 			if (notEnterFlg){
 				 alert("過去日の勤怠に未入力があります。");
