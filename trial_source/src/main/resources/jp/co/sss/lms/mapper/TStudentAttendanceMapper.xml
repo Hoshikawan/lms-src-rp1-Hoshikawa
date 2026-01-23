@@ -44,7 +44,7 @@
 	</select>
 	
 <!--	製造：星川詩音 - Task.25-->
-	<!--id="countUnenteredPastAttendance"  自分でつけて良いid名-->
+	<!--id="notEnterCount"  自分でつけて良いid名-->
 	<!--resultType="int"  SQLの結果をどの型でJava側に受け取らせるか指定するもの(今回は数字なのでintで良い)-->
 	<select id="notEnterCount" resultType="int">
 		SELECT COUNT(*)
