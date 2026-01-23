@@ -147,14 +147,55 @@ public class AttendanceUtil {
 		return false;
 	}
 	
+	/*
+	 * 【基礎知識として】
+	 * ・このクラスには、setBlankTime()というプルダウン生成メソッドが存在している。
+	 * ・Mapとは、キーとバリューで構成されており、「キー（名前）で物を取り出せる箱」
+	 * ・Mapには種類がある。（HashMap・LinkedHashMap）
+	 *   →HashMapだと順番がバラバラになる可能性があるため、putした順番に並ぶLinkedHashMap（設計書指定）を使っている
+	 * ・Utilとはどの画面からでも使える（変換・整形・生成に特化）。
+	 *   →Utilを使わないといけないと判断する順番は、
+	 *     １，要件に「プルダウン」という言葉がある
+	 *     ２，プルダウンには「選択肢データ」が必要
+	 *     ３，選択肢は毎回同じ（0-24と0-59）
+	 *     ４，変更管理台帳にDBに持たせなくて良いと記述がある
+	 *     ５，画面専用データであり、画面レイアウト設計書に勤怠Utilを使用すると記述がある。
+	 *       →Utilで生成するのが良い
+	 * ・設計書の「戻り値」はreturnの後ろに記述するのもではなく、「このメソッドが最終的に外へ渡す型」という意味
+	 * 
+	 * ・for (int i = 0; i < 24; i++) 
+	 *   →0スタートの23までのループを作成。（同じ形の選択肢で、数が確実に決まっており大量に並ぶ場合はfor文が良い）
+	 * 
+	 * ・map.put(i, String.format("%02d", i));
+	 *   →map.putとは、キーに対応するバリュー(値)を登録するという意味。
+	 *   →mapに「i」というキーと「2桁に整形した文字列」を1セットで入れている。
+	 * →("%02d", i)これの"%02d"について「%d」で数値を文字列にし「2」で2桁で「0」で足りない桁は0で埋める
+	 */
+	
 	/**
 	 * 時間のプルダウンマップを生成
 	 * 
 	 * @return １時間刻みの時間マップ
 	 */
-//	public LinkedHashMap<Integer, String> getHourMap(){
-//		
-//		return null;
-//	}
+	public LinkedHashMap<Integer, String> getHourMap(){
+		LinkedHashMap<Integer, String> map = new LinkedHashMap<>();
+		for (int i = 0; i < 24; i++) {
+			map.put(i, String.format("%02d", i));
+		}
+		return map;
+	}
+	
+	/**
+	 * 分のプルダウンマップを生成
+	 * 
+	 * @return 1分刻みの分マップ
+	 */
+	public LinkedHashMap<Integer, String> getMinuteMap(){
+		LinkedHashMap<Integer, String> map = new LinkedHashMap<>();
+		for (int i = 0; i < 60; i++) {
+			map.put(i, String.format("%02d", i));
+		}
+		return map;
+	}
 
 }
