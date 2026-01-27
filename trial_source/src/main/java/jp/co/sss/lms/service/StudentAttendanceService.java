@@ -1,6 +1,7 @@
 package jp.co.sss.lms.service;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 //import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -125,20 +126,38 @@ public class StudentAttendanceService {
 	}
 
 	/**
-	 * 製造：星川詩音 - Task.25
+	 * @author 星川詩音 - Task.25
 	 * 過去の勤怠に未入力が存在するかチェック
 	 * 
 	 * @param lmsUserId
 	 * @return 過去日に未入力が存在する場合はtrue、存在しない場合はfalse
 	 */
-	public boolean husUnenteredPastAttendance(Integer lmsUserId) {
+	public boolean checkHasUnenteredPastAttendance(Integer lmsUserId) {
 		// 現在日時を取得
-		Date trainingDate = new Date();
-		// 未入力件数の取得 引数の順番がMapperと同じじゃないとエラーが出てきてしまう
-		int deleteFlg = 0;
-		int unenteredCount = tStudentAttendanceMapper.notEnterCount(lmsUserId, deleteFlg, trainingDate);
+		Date todayDate = new Date();
+		String todayFormat = dateUtil.toString(todayDate);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/M/d");
+
+		Date today;
+		try {
+			today = sdf.parse(todayFormat);
+		} catch (ParseException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+			return false;
+		}
+
+		int deleteFlg = Constants.DB_FLG_FALSE;
+
+		int count = tStudentAttendanceMapper.notEnterCount(
+				lmsUserId,
+				deleteFlg,
+				today
+		);
+//		とりあえず何も考えずにDateUtil.javaを使おうとしているからほかのクラスも修正が必要
 		// 件数が１件以上あればtrue
-		return unenteredCount > 0;
+		return count > 0;
 	}
 
 	/**

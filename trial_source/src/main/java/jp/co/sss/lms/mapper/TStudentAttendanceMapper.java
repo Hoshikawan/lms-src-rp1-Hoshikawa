@@ -8,7 +8,6 @@ import org.apache.ibatis.annotations.Param;
 
 import jp.co.sss.lms.dto.AttendanceManagementDto;
 import jp.co.sss.lms.entity.TStudentAttendance;
-import jp.co.sss.lms.util.DateUtil;
 
 /**
  * 勤怠情報（受講生入力）テーブルマッパー
@@ -59,8 +58,8 @@ public interface TStudentAttendanceMapper {
 	 * @return 過去日未入力件数
 	 */
 	// SQLがCOUNT(*)を返すので、Java側の戻り値型はint
-	 int notEnterCount(@Param("lmsUserId") Integer lmsUserId,@Param("deleteFlg") Integer deleteFlg, 
-			 @Param("trainingDate") DateUtil dateUtil);
+	 int notEnterCount(@Param("lmsUserId") Integer lmsUserId,@Param("deleteFlg") int deleteFlg, 
+			 @Param("trainingDate") Date trainingDate);
 
 	/**
 	 * 勤怠情報（受講生入力）登録
