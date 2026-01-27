@@ -26,6 +26,17 @@ public class DailyAttendanceForm {
 	private String blankTimeValue;
 	/** ステータス */
 	private String status;
+	
+	/**	@author 星川詩音 - Task.26 */
+	/**	出勤時間（時） */
+	private Integer trainingStartHour;
+	/**	出勤時間（分） */
+	private Integer trainingStartMinute;
+	/**	退勤時間（時） */
+	private Integer trainingEndHour;
+	/**	退勤時間（分） */
+	private Integer trainingEndMinute;
+	
 	/** 備考 */
 	private String note;
 	/** セクション名 */
