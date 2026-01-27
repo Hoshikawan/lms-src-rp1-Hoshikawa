@@ -103,9 +103,9 @@ public class AttendanceUtil {
 	}
 
 	/**
-	 * 休憩時間取得
-	 * 
-	 * @return 休憩時間
+	 * 中抜け時間取得
+	 * 		※最初から作成されていたものだけど、恐らく休憩じゃなくて中抜け用のメソッドだと思う
+	 * @return 中抜け時間
 	 */
 	public LinkedHashMap<Integer, String> setBlankTime() {
 		LinkedHashMap<Integer, String> map = new LinkedHashMap<>();
@@ -173,6 +173,7 @@ public class AttendanceUtil {
 	 */
 	
 	/**
+	 * @author 星川詩音 - Task.26
 	 * 時間のプルダウンマップを生成
 	 * 
 	 * @return １時間刻みの時間マップ
@@ -186,6 +187,7 @@ public class AttendanceUtil {
 	}
 	
 	/**
+	 * @author 星川詩音 - Task.26
 	 * 分のプルダウンマップを生成
 	 * 
 	 * @return 1分刻みの分マップ
@@ -196,6 +198,45 @@ public class AttendanceUtil {
 			map.put(i, String.format("%02d", i));
 		}
 		return map;
+	}
+	
+	/**
+	 * @author 星川詩音 - Task.26
+	 * 時間（時）の切り出し
+	 * 
+	 * @param time hh:mm形式の文字列
+	 * @return 時（Integer）
+	 */
+//	public Integer getHour(String time) {
+//		// timeがnullまたは、空文字の場合は処理をすることなくnullを返す。
+//		if (time == null || time.isEmpty())
+//			return null;
+//		// hh:mm形式を:で分割して配列にする
+//		// 例："09:15"は、parts[0] = 09, parts[1] = 15 となる。
+//		String[] parts = time.split(":");
+//		// StringをIntegerに変換して返すことができる（文字列をそのまま数値として使える形に変換）
+//		// valueOfはparts[0]は時間部位
+//		return Integer.valueOf(parts[0]);
+//	}
+	public Integer getHour(String time) {
+		if (time == null || time.isEmpty())
+			return null;
+		String[] parts = time.split(":");
+		return Integer.valueOf(parts[0]);
+	}
+	
+	/**
+	 * @author 星川詩音 - Task.26
+	 * 時間（分）の切り出し
+	 * 
+	 * @param time hh:mm形式の文字列
+	 * @return 分（Integer）
+	 */
+	public Integer getMinute(String time) {
+		if(time == null || time.isEmpty())
+			return null;
+		String[] parts = time.split(":");
+		return Integer.valueOf(parts[1]);
 	}
 
 }
