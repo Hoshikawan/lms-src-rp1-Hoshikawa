@@ -68,8 +68,8 @@
 									</select>
 								</td>
 								
-								<!-- 退勤 -->
 								<!-- @author 星川詩音 - Task.26 -->
+								<!-- 退勤 -->
 								<td class="w70">
 									<select th:name="|attendanceList[${stat.index}].trainingEndHour|" class="form-control">
 										<option th:each="hour : ${attendanceForm.hourTime}" th:value="${hour.key}" th:index="text" class="form-control"
