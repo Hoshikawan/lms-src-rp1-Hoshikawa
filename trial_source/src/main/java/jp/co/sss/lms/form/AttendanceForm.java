@@ -32,9 +32,9 @@ public class AttendanceForm {
 	
 	/**	@author 星川詩音 - Task.26 */
 	/**	時間（時）マップ */
-	private LinkedHashMap<Integer, String> hourMap;
+	private LinkedHashMap<Integer, String> hourTime;
 	/**	時間（分）マップ */
-	private LinkedHashMap<Integer, String> minuteMap;
+	private LinkedHashMap<Integer, String> minuteTime;
 	
 	/** 日次の勤怠フォームリスト */
 	private List<DailyAttendanceForm> attendanceList;
