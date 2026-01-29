@@ -137,6 +137,9 @@ public class AttendanceController {
 	public String complete(AttendanceForm attendanceForm, Model model, BindingResult result)
 			throws ParseException {
 
+		// @author 星川詩音 - Task.26
+		// 勤怠を直接修正し、「更新」を押したときにDBに登録されるようにする処理
+		studentAttendanceService.formatConversion(attendanceForm);
 		// 更新
 		String message = studentAttendanceService.update(attendanceForm);
 		model.addAttribute("message", message);

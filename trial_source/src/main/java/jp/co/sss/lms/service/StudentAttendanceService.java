@@ -388,5 +388,23 @@ public class StudentAttendanceService {
 		// 完了メッセージ
 		return messageUtil.getMessage(Constants.PROP_KEY_ATTENDANCE_UPDATE_NOTICE);
 	}
+	
+	// @author 星川詩音 - Task.26
+	// 勤怠を直接修正し、「更新」を押したときにDBに登録されるようにする処理
+	public void formatConversion(AttendanceForm attendanceForm) {
+		List<DailyAttendanceForm> dailyAttendance = new ArrayList<DailyAttendanceForm>();
+		for (DailyAttendanceForm form : attendanceForm.getAttendanceList()) {
+			if (form.getTrainingStartHour() != null && form.getTrainingStartMinute() != null) {
+				form.setTrainingStartTime(String.format("%02d", form.getTrainingStartHour()) + ":"
+						+ String.format("%02d", form.getTrainingStartMinute()));
+			}
+			if (form.getTrainingEndHour() != null && form.getTrainingEndMinute() != null) {
+				form.setTrainingEndTime(String.format("%02d", form.getTrainingEndHour()) + ":"
+						+ String.format("%02d", form.getTrainingEndMinute()));
+			}
+			dailyAttendance.add(form);
+		}
+		BeanUtils.copyProperties(attendanceForm, dailyAttendance);
+	}
 
 }
